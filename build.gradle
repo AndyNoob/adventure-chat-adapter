@@ -1,6 +1,6 @@
 plugins {
     id 'java'
-    id 'io.papermc.paperweight.userdev' version '1.5.9'
+    id 'io.papermc.paperweight.userdev' version '1.5.10'
     id 'com.github.johnrengelman.shadow' version '8.1.1'
 }
 
@@ -20,15 +20,15 @@ repositories {
 }
 
 dependencies {
-    paperweight.paperDevBundle '1.17.1-R0.1-SNAPSHOT'
+    paperweight.paperDevBundle '1.20.2-R0.1-SNAPSHOT'
     implementation('net.kyori:adventure-text-minimessage:4.14.0') {
-        exclude module: 'gson'
-        exclude module: 'adventure-api'
-        exclude module: 'adventure-bom'
+        exclude 'module': 'gson'
+        exclude 'module': 'adventure-api'
+        exclude 'module': 'adventure-bom'
     }
 }
 
-def targetJavaVersion = 16
+def targetJavaVersion = 17
 
 java {
     def javaVersion = JavaVersion.toVersion(targetJavaVersion)
@@ -47,7 +47,8 @@ tasks.withType(JavaCompile).configureEach {
 
 shadowJar {
     enableRelocation = true
-    relocationPrefix = group + '.' + name
+    relocationPrefix = rootProject.group + '.' + rootProject.name + '.libs'
+    println relocationPrefix
     archiveClassifier = ''
     minimize()
 }

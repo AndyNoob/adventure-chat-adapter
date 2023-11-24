@@ -1,4 +1,4 @@
-package me.comfortable_andy.adventure_adapter;
+package me.comfortable_andy.adventure_chat;
 
 import io.papermc.paper.event.player.AsyncChatEvent;
 import net.kyori.adventure.text.TextComponent;
@@ -7,7 +7,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
 
-public final class AdventureAdapterMain extends JavaPlugin implements Listener {
+public final class AdventureChatMain extends JavaPlugin implements Listener {
 
     @Override
     public void onEnable() {

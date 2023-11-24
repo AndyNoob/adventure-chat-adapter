@@ -1,5 +1,5 @@
-name: AdventureAdapter
+name: AdventureChat
 version: '${version}'
-main: me.comfortable_andy.adventure_adapter.AdventureAdapterMain
+main: me.comfortable_andy.adventure_chat.AdventureChatMain
 api-version: '1.16'
 authors: [Comfortable_Andy]
