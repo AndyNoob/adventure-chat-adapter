@@ -1,0 +1,66 @@
+plugins {
+    id 'java'
+    id 'io.papermc.paperweight.userdev' version '1.5.9'
+    id 'com.github.johnrengelman.shadow' version '8.1.1'
+}
+
+group = 'me.comfortable_andy'
+version = '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+    maven {
+        name = "papermc-repo"
+        url = "https://repo.papermc.io/repository/maven-public/"
+    }
+    maven {
+        name = "sonatype"
+        url = "https://oss.sonatype.org/content/groups/public/"
+    }
+}
+
+dependencies {
+    paperweight.paperDevBundle '1.17.1-R0.1-SNAPSHOT'
+    implementation('net.kyori:adventure-text-minimessage:4.14.0') {
+        exclude module: 'gson'
+        exclude module: 'adventure-api'
+        exclude module: 'adventure-bom'
+    }
+}
+
+def targetJavaVersion = 16
+
+java {
+    def javaVersion = JavaVersion.toVersion(targetJavaVersion)
+    sourceCompatibility = javaVersion
+    targetCompatibility = javaVersion
+    if (JavaVersion.current() < javaVersion) {
+        toolchain.languageVersion.set(JavaLanguageVersion.of(targetJavaVersion))
+    }
+}
+
+tasks.withType(JavaCompile).configureEach {
+    if (targetJavaVersion >= 10 || JavaVersion.current().isJava10Compatible()) {
+        options.release.set(targetJavaVersion)
+    }
+}
+
+shadowJar {
+    enableRelocation = true
+    relocationPrefix = group + '.' + name
+    archiveClassifier = ''
+    minimize()
+}
+
+assemble {
+    dependsOn shadowJar
+}
+
+processResources {
+    def props = [version: version]
+    inputs.properties props
+    filteringCharset 'UTF-8'
+    filesMatching('plugin.yml') {
+        expand props
+    }
+}
