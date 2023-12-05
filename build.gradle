@@ -1,6 +1,5 @@
 plugins {
     id 'java'
-    id 'io.papermc.paperweight.userdev' version '1.5.10'
     id 'com.github.johnrengelman.shadow' version '8.1.1'
 }
 
@@ -20,7 +19,7 @@ repositories {
 }
 
 dependencies {
-    paperweight.paperDevBundle '1.20.2-R0.1-SNAPSHOT'
+    compileOnly("io.papermc.paper:paper-api:1.17.1-R0.1-SNAPSHOT")
     implementation('net.kyori:adventure-text-minimessage:4.14.0') {
         exclude 'module': 'gson'
         exclude 'module': 'adventure-api'
@@ -28,7 +27,7 @@ dependencies {
     }
 }
 
-def targetJavaVersion = 17
+def targetJavaVersion = 16
 
 java {
     def javaVersion = JavaVersion.toVersion(targetJavaVersion)
