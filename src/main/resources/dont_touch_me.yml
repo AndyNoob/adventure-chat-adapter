@@ -1,0 +1,5 @@
+# Please don't touch
+serializerClass: "net.kyori.adventure.text.serializer.gson.GsonComponentSerializer"
+componentClass: "net.kyori.adventure.text.Component"
+textComponentClass: "net.kyori.adventure.text.TextComponent"
+# Please don't touch ty
